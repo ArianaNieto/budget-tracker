@@ -640,11 +640,12 @@ async function saveExpense() {
 async function sendToSheets(expense) {
   const url = state.sheetsUrl;
   if (!url) return;
+  const form = new FormData();
+  Object.entries(expense).forEach(([k, v]) => form.append(k, v));
   await fetch(url, {
     method: 'POST',
     mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(expense),
+    body: form,
   });
 }
 
