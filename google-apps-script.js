@@ -8,7 +8,7 @@ const HEADERS    = ["ID", "Fecha", "Descripción", "Categoría", "Monto", "Moned
 
 function doPost(e) {
   try {
-    const data    = JSON.parse(e.postData.contents);
+    const data = e.parameter;
     const ss      = SpreadsheetApp.getActiveSpreadsheet();
     let   sheet   = ss.getSheetByName(SHEET_NAME);
 
@@ -41,12 +41,14 @@ function doPost(e) {
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin', '*');
 
   } catch (err) {
     return ContentService
       .createTextOutput(JSON.stringify({ ok: false, error: err.message }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin', '*');
   }
 }
 
