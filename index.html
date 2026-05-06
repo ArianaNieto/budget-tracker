@@ -21,6 +21,7 @@
   --radius-sm: 10px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: dark; }
 body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
 .tab-bar { display: flex; background: var(–surface); border-bottom: 1px solid #ffffff10; position: sticky; top: 0; z-index: 100; }
@@ -43,9 +44,17 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 width: 100%; background: var(–surface2); border: 1.5px solid #ffffff12;
 border-radius: var(–radius-sm); color: var(–text); font-size: 15px;
 padding: 12px 14px; outline: none; transition: border-color .2s; -webkit-appearance: none;
+-webkit-text-fill-color: var(–text);
+color-scheme: dark;
 }
 .form-group input:focus, .form-group select:focus { border-color: var(–accent); }
-.form-group select option { background: #1a1a2e; }
+.form-group select option { background: #1a1a2e; color: var(–text); }
+/* Fix Safari autofill / system override */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:focus {
+-webkit-box-shadow: 0 0 0 100px var(–surface2) inset !important;
+-webkit-text-fill-color: var(–text) !important;
+}
 
 .amount-wrap { position: relative; }
 .amount-wrap .currency { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(–accent2); font-weight: 700; font-size: 15px; pointer-events: none; }
